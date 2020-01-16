@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-const fontColor = Color(0xFF8D8E98);
-const labelTextStyle = TextStyle(fontSize: 18, color: fontColor);
+import 'constants.dart';
 
 class CardChild extends StatelessWidget {
   final String label;
@@ -23,7 +22,7 @@ class CardChild extends StatelessWidget {
         ),
         Text(
           label,
-          style: labelTextStyle,
+          style: KLabelTextStyle,
         ),
       ],
     );
