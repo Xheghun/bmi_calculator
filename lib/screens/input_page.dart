@@ -1,9 +1,12 @@
-import 'package:bmi_calculator/reusable_card.dart';
+import 'package:bmi_calculator/calculator.dart';
+import 'package:bmi_calculator/screens/results_page.dart';
+import 'package:bmi_calculator/widgets/reusable_card.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'card_child.dart';
-import 'constants.dart';
+import '../constants.dart';
+import '../widgets/bottom_button.dart';
+import '../widgets/card_child.dart';
 
 enum Gender { MALE, FEMALE }
 
@@ -81,7 +84,7 @@ class _InputPageState extends State<InputPage> {
                       children: <Widget>[
                         Text(
                           height.toString(),
-                          style: KLargeTextStyle,
+                          style: largeTextStyle,
                         ),
                         Text(
                           "cm",
@@ -130,7 +133,7 @@ class _InputPageState extends State<InputPage> {
                         ),
                         Text(
                           weight.toString(),
-                          style: KLargeTextStyle,
+                          style: largeTextStyle,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -176,7 +179,7 @@ class _InputPageState extends State<InputPage> {
                         ),
                         Text(
                           age.toString(),
-                          style: KLargeTextStyle,
+                          style: largeTextStyle,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -213,11 +216,22 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          Container(
-            color: KBottomContainerColor,
-            margin: EdgeInsets.only(top: 10),
-            width: double.infinity,
-            height: KBottomContainerHeight,
+          BottomButton(
+            onTap: () {
+              CalculatorBrain calc =
+              CalculatorBrain(height: height, weight: weight);
+
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          ResultPage(
+                            bmiResult: calc.calculateBMI(),
+                            interpretation: calc.getInterpretation(),
+                            resultText: calc.getResult(),
+                          )));
+            },
+            buttonText: "CALCULATE",
           )
         ],
       ),
